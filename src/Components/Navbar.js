@@ -4,7 +4,7 @@ const Navbar=()=>{
     return(
         <>
  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-     <Link to={'/'}>
+     <Link to={'/'} >
      <a className="navbar-brand" href="#">QuizApp</a>
      </Link>
   

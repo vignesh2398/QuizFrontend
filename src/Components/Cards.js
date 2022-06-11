@@ -17,12 +17,12 @@ const Cards=()=>{
         }
     }
     useEffect(()=>{
-        axios.get('http://localhost:5000/getQuestions').then((res)=>{
+        axios.get('https://quizapivignesh.herokuapp.com/getQuestions').then((res)=>{
            setdatas(res.data)
        }).catch((err)=>{
            console.log(err)
          })
-         console.log('Getting Data...')
+         console.log('Getting Data...Card')
    },[]) 
     return(
         <>

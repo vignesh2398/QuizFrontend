@@ -20,7 +20,7 @@ export const CreateQuestion = () => {
         }))
     }
     const handleCreate=async()=>{
-      const createData=await axios.post('http://localhost:5000/CreateQuestion',question).then((res)=>{
+      const createData=await axios.post('https://quizapivignesh.herokuapp.com/CreateQuestion',question).then((res)=>{
         console.log(res)
       }).catch((err)=>{
         console.log(err)

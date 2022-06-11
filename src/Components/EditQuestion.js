@@ -24,7 +24,8 @@ const EditQuestion=()=>{
         }))
     }
     const handleUpdate=async(id)=>{
-        const inUpdated=await axios.put(`http://localhost:5000/updateQuestion/${id}`,question).then((res)=>{
+        console.log(id)
+        const inUpdated=await axios.put(`https://quizapivignesh.herokuapp.com/updateQuestion/${id}`,question).then((res)=>{
             console.log(res)
         }).catch((err)=>{
             console.log(err)
@@ -38,26 +39,23 @@ const EditQuestion=()=>{
 
 
     const handleSelected=async(questionid)=>{
-        setselected(questionid)
-        console.log(selected)
-        await axios.get(`http://localhost:5000/getQuestion/${questionid}`).then((res)=>{
+        setselected(questionid._id)
+        console.log(questionid)
+        
             setQuestion({
-                question:res.data.question,
-                option1:res.data.option1,
-                option2:res.data.option2,
-                option3:res.data.option3,
-                answer:res.data.answer,
+                question:questionid.question,
+                option1:questionid.option1,
+                option2:questionid.option2,
+                option3:questionid.option3,
+                answer:questionid.answer
             })
-            setselected(questionid);
-        }).catch((err)=>{
-            console.log(err)
-        })
+            setselected(questionid._id);
     
     }
     const handleDelete=async(questionid)=>{
         setselected(questionid)
         console.log(selected)
-        const delete1=await axios.delete(`http://localhost:5000/deleteQuestion/${questionid}`).then((res)=>{
+        const delete1=await axios.delete(`https://quizapivignesh.herokuapp.com/deleteQuestion/${questionid}`).then((res)=>{
             console.log(res)
         }).catch((err)=>{
             console.log(err)
@@ -73,7 +71,7 @@ const EditQuestion=()=>{
 
 
     useEffect(()=>{
-         axios.get('http://localhost:5000/getQuestions').then((res)=>{
+         axios.get('https://quizapivignesh.herokuapp.com/getQuestions').then((res)=>{
             setdatas(res.data)
         }).catch((err)=>{
             console.log(err)
@@ -93,7 +91,7 @@ return(
                     <>
                     <li className="list-group-item">{item.question}
 
-                    <a className='btn btn-outline-warning'  onClick={()=>handleSelected(item._id)}>Edit</a>
+                    <a className='btn btn-outline-warning'  onClick={()=>handleSelected(item)}>Edit</a>
                   <button type="submit" className="btn btn-primary" onClick={()=>handleDelete(item._id)}>Delete</button>
                     </li>
                     
