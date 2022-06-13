@@ -53,12 +53,12 @@ const Cards=()=>{
    datas[index] ?<>
         <div className="card" style={{width: "18rem"}}>
 
-  <div className="card-body">
+  <div className="card-body text-left ">
     <h5 className="card-title ">{index+1}{"."}{datas[index]?.question}</h5>
-   <p className="card-text">
+   <p className="card-text ">
     <div className="form-check" onClick={()=>handleSelected(datas[index]?.option1)}>
       <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value={datas[index]?.option1}/>
-  <label className="form-check-label" for="exampleRadios1">
+  <label className="form-check-label text-xl-start" for="exampleRadios1">
     {datas[index].option1}
   </label>
   </div>
