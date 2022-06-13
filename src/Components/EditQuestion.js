@@ -91,8 +91,8 @@ return(
                     <>
                     <li className="list-group-item">{item.question}
 
-                    <a className='btn btn-outline-warning'  onClick={()=>handleSelected(item)}>Edit</a>
-                  <button type="submit" className="btn btn-primary" onClick={()=>handleDelete(item._id)}>Delete</button>
+                    <a className='btn btn-primary btn btn-primary col px-md-5'  onClick={()=>handleSelected(item)}>Edit</a>
+                  <button type="submit" className="btn btn-danger col px-md-5 " onClick={()=>handleDelete(item._id)}>Delete</button>
                     </li>
                     
                     </>
@@ -121,7 +121,7 @@ return(
 </div>
 <div className="form-group">
   <input type="text" className="form-control" id="answer" name="answer" value={question.answer} onChange={handleChange} placeholder="answer"/>
-<button type="submit" className="btn btn-primary" onClick={()=>handleUpdate(selected)}>Update</button>
+<button type="submit" className="btn btn-success" onClick={()=>handleUpdate(selected)}>Update</button>
 </div>
 
  </div>

@@ -3,18 +3,36 @@ import axios from "axios";
 const Cards=()=>{
     const [datas,setdatas]=useState([]);
     const[selectedItem,setselectedItem]=useState('');
-    
+    const [index,setindex]=useState(0);
+    const [point,setpoint]=useState(0);
     const handleSelected=(item)=>{
         setselectedItem(item)
     }
     const handleCompare=(ans)=>{
-        if(ans === selectedItem )
+      console.log("selected",selectedItem)
+      if(selectedItem){
+
+        if(ans === selectedItem  )
         {
-            alert("Correct")
+            alert("Answer submited")
+            setindex(index+1)
+            console.log(index)
+            setpoint(point+1)
+
         }
         else{
-            alert("Wrong")
+            alert("Answer submited")
+            setindex(index+1)
         }
+      }
+      else{
+        alert("please select answer")
+      }
+    }
+
+    const tryagain=()=>{
+      setpoint(0)
+      setindex(0)
     }
     useEffect(()=>{
         axios.get('https://quizapivignesh.herokuapp.com/getQuestions').then((res)=>{
@@ -24,50 +42,62 @@ const Cards=()=>{
          })
          console.log('Getting Data...Card')
    },[]) 
+   console.log("value",datas[index])
     return(
-        <>
+      <>
+<div className="col-md-4 mx-auto mt-5" style={{marginTop:'18%'}}>
  {
-    datas?.map((question)=>{
-        return(<>
+
+   datas[index] ?<>
         <div className="card" style={{width: "18rem"}}>
 
   <div className="card-body">
-    <h5 className="card-title">{question?.question}</h5>
+    <h5 className="card-title">{datas[index]?.question}</h5>
    <p className="card-text">
-    <div className="form-check" onClick={()=>handleSelected(question?.option1)}>
-  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value={question?.option1}/>
+    <div className="form-check" onClick={()=>handleSelected(datas[index]?.option1)}>
+      <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value={datas[index]?.option1}/>
   <label className="form-check-label" for="exampleRadios1">
-    {question.option1}
+    {datas[index].option1}
   </label>
   </div>
    </p>
    <p className="card-text">
-    <div className="form-check" onClick={()=>handleSelected(question?.option2)}>
-  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value={question?.option2}/>
+    <div className="form-check" onClick={()=>handleSelected(datas[index]?.option2)}>
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value={datas[index]?.option2}/>
   <label className="form-check-label" for="exampleRadios1">
-    {question.option2}
+    {datas[index].option2}
   </label>
   </div>
    </p>
    <p className="card-text">
-    <div className="form-check" onClick={()=>handleSelected(question?.option3)}>
-  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value={question?.option3}/>
+    <div className="form-check" onClick={()=>handleSelected(datas[index]?.option3)}>
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value={datas[index]?.option3}/>
   <label className="form-check-label" for="exampleRadios1">
-    {question.option3}
+    {datas[index].option3}
   </label>
   </div>
    </p>
-   <a href="#" className="btn btn-primary" onClick={()=>handleCompare(question?.answer)}>Next</a>
+   <a href="#" className="btn btn-primary" onClick={()=>handleCompare(datas[index]?.answer)}>Submit</a>
 
   </div>
+   
 </div>
 
- </> )
-    })
+  
+ </>:
+ <div>
+
+ <p className="text-success">Congo</p>
+ <p className="text-success">Your score is:{point}</p>
+ <a href="#" className="btn btn-primary" onClick={tryagain}>Try again</a>
+ 
+ </div>
  }
+
+ </div>
 </>
 )
 }
 
-
 export default Cards;
+
