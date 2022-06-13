@@ -18,11 +18,13 @@ const Cards=()=>{
             setindex(index+1)
             console.log(index)
             setpoint(point+1)
+            setselectedItem('')
 
         }
         else{
             alert("Answer submited")
             setindex(index+1)
+            setselectedItem('')
         }
       }
       else{
