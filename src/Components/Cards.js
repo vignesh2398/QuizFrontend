@@ -54,7 +54,7 @@ const Cards=()=>{
         <div className="card" style={{width: "18rem"}}>
 
   <div className="card-body">
-    <h5 className="card-title">{datas[index]?.question}</h5>
+    <h5 className="card-title ">{index}{datas[index]?.question}</h5>
    <p className="card-text">
     <div className="form-check" onClick={()=>handleSelected(datas[index]?.option1)}>
       <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value={datas[index]?.option1}/>
