@@ -13,7 +13,7 @@ const Navbar=()=>{
   </button>
   <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div className="navbar-nav">
-{/*
+
 
       <Link to ={'/createQuestion'}> 
       <a className="nav-item nav-link" href="#">Create Question</a>
@@ -21,7 +21,10 @@ const Navbar=()=>{
       <Link to={'/EditQuestion'}>
       <a className="nav-item nav-link" href="#">Edit Question</a>
       </Link>
-*/}
+      <Link to={'/Login'}>
+      <a className="nav-item nav-link" href="#">Login</a>
+      </Link>
+
       
     </div>
   </div>

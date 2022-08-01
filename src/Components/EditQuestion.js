@@ -1,7 +1,46 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { url } from '../App';
+import { useNavigate } from 'react-router-dom'
+
 const EditQuestion=()=>{
+    let navigate = useNavigate();
+  let auth = async()=>{
+      let token = sessionStorage.getItem('token');
+      if(token)
+      {
+          let res = await axios.get(`${url}/users/verify-token/${token}`)
+          if(res.data.statusCode===401)
+          {
+              sessionStorage.clear();
+              navigate('/Login')
+
+          }
+      }
+      else{
+        navigate('/Login')
+      }
+  }
+
+  useEffect(()=>{
+auth()
+},[])
+/*    let navigate = useNavigate();
+    let auth = async()=>{
+        let token = sessionStorage.getItem('token');
+        if(token)
+        {
+            let res = await axios.get(`${url}/users/verify-token/${token}`)
+            if(res.data.statusCode===401)
+            {
+                sessionStorage.clear();
+                navigate('/Login')
+
+            }
+        }
+    } */
+
     const [selected,setselected]=useState([]);
     const[counter,setcounter]=useState([]);
     const [datas,setdatas]=useState([]);
@@ -24,6 +63,7 @@ const EditQuestion=()=>{
         }))
     }
     const handleUpdate=async(id)=>{
+        auth()
         console.log(id)
         const inUpdated=await axios.put(`https://quizapivignesh.herokuapp.com/updateQuestion/${id}`,question).then((res)=>{
             console.log(res)
@@ -67,6 +107,11 @@ const EditQuestion=()=>{
         }
     
     }
+    const logout=async()=>{
+        sessionStorage.clear();
+        navigate('/')
+
+    }
 
 
 
@@ -78,6 +123,10 @@ const EditQuestion=()=>{
           })
           console.log('Getting Data...')
     },[counter])
+
+    /// loign autho
+   
+
 return(
 
     <>
@@ -126,6 +175,10 @@ return(
 
  </div>
 </div>
+ </div>
+ <div>
+
+ <button type="button" onClick={logout} className="btn btn-primary">Go to Quiz</button>
  </div>
     </>
 )

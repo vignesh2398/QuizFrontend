@@ -1,6 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from "axios";
+import { url } from '../App';
 export const CreateQuestion = () => {
+  let navigate = useNavigate();
+  let auth = async()=>{
+      let token = sessionStorage.getItem('token');
+      if(token)
+      {
+          let res = await axios.get(`${url}/users/verify-token/${token}`)
+          if(res.data.statusCode===401)
+          {
+              sessionStorage.clear();
+              navigate('/Login')
+
+          }
+      }
+      else{
+        navigate('/Login')
+      }
+  }
+
+  useEffect(()=>{
+auth()
+},[])
+const logout=async()=>{
+  sessionStorage.clear();
+  navigate('/')
+
+}
+
     const [question,setQuestion]=useState({
         question:'',
         option1:'',
@@ -19,7 +48,9 @@ export const CreateQuestion = () => {
         
         }))
     }
+
     const handleCreate=async()=>{
+      auth()
       const createData=await axios.post('https://quizapivignesh.herokuapp.com/CreateQuestion',question).then((res)=>{
         console.log(res)
       }).catch((err)=>{
@@ -63,6 +94,7 @@ export const CreateQuestion = () => {
   
   
   <button type="submit" className="btn btn-primary" onClick={handleCreate}>Create</button>
+  <button type="button" onClick={logout} className="btn btn-primary">Go to Quiz</button>
 
    </div>
    
