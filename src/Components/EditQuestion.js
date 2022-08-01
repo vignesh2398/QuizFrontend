@@ -79,6 +79,7 @@ auth()
 
 
     const handleSelected=async(questionid)=>{
+        auth()
         setselected(questionid._id)
         console.log(questionid)
         
@@ -93,6 +94,7 @@ auth()
     
     }
     const handleDelete=async(questionid)=>{
+        auth()
         setselected(questionid)
         console.log(selected)
         const delete1=await axios.delete(`https://quizapivignesh.herokuapp.com/deleteQuestion/${questionid}`).then((res)=>{

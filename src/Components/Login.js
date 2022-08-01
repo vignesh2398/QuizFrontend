@@ -53,7 +53,7 @@ const Login = () => {
 
     <button type="submit" className="btn btn-primary">Login</button>
     <div className='my-3'>{message?<span>incorrect details</span>:<></>}</div>
-  <div className='my-3'>{loading?"need to import spinner":<></>}</div>
+  <div className='my-3'>{loading?"loading..":<></>}</div>
   <button type="button" onClick={logout} className="btn btn-primary">Logout</button>
   <p>email:abcd@gmail.com password:123456</p>
   </form></>
